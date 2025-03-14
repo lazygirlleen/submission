@@ -1,0 +1,5 @@
+  Local URL: http://localhost:8501
+  Network URL: http://172.28.0.12:8501
+  External URL: http://35.247.1.109:8501
+
+⠼⠴your url is: https://grumpy-ghosts-show.loca.lt
