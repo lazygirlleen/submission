@@ -8,7 +8,7 @@ import seaborn as sns
 sns.set_style("whitegrid")
 
 # Title of the app
-st.title("📊 Analisis Peminjaman Sepeda")
+st.title("📊 Analisis Peminjaman Sepeda dari Always Bike")
 
 # Load dataset
 def load_data(filename):
@@ -22,8 +22,7 @@ df_day["dteday"] = pd.to_datetime(df_day["dteday"])
 df_hour["dteday"] = pd.to_datetime(df_hour["dteday"])
 
 # Sidebar untuk filter data
-st.sidebar.image("https://cdn.pixabay.com/photo/2023/03/25/19/23/bicycle-7876692_1280.png", caption="Gambar dari URL")
-# st.sidebar.image("download.png", width=150)
+st.sidebar.image("https://cdn.pixabay.com/photo/2023/03/25/19/23/bicycle-7876692_1280.png", caption="Always Bike")
 st.sidebar.subheader("🔍 Filter Data")
 
 # Pilih rentang tanggal
