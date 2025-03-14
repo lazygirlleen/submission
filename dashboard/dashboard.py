@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,10 +11,14 @@ sns.set_style("whitegrid")
 st.title("📊 Analisis Peminjaman Sepeda")
 
 # Load dataset
-df_day = pd.read_csv("submission/dashboard/day.csv")
-df_day["dteday"] = pd.to_datetime(df_day["dteday"])
+def load_data(filename):
+    filepath = os.path.join(os.path.dirname(__file__), filename)
+    return pd.read_csv(filepath)
 
-df_hour = pd.read_csv("submission/dashboard/hour.csv")
+df_day = load_data("day.csv")
+df_hour = load_data("hour.csv")
+
+df_day["dteday"] = pd.to_datetime(df_day["dteday"])
 df_hour["dteday"] = pd.to_datetime(df_hour["dteday"])
 
 # Sidebar untuk filter data
