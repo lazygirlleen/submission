@@ -22,7 +22,7 @@ df_day["dteday"] = pd.to_datetime(df_day["dteday"])
 df_hour["dteday"] = pd.to_datetime(df_hour["dteday"])
 
 # Sidebar untuk filter data
-st.sidebar.image("download.png", width=150)
+# st.sidebar.image("download.png", width=150)
 st.sidebar.subheader("🔍 Filter Data")
 
 # Pilih rentang tanggal
