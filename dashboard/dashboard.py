@@ -22,7 +22,7 @@ df_day["dteday"] = pd.to_datetime(df_day["dteday"])
 df_hour["dteday"] = pd.to_datetime(df_hour["dteday"])
 
 # Sidebar untuk filter data
-st.sidebar.image("https://images.app.goo.gl/6WC599q4XXk2TLGX9", caption="Gambar dari URL")
+st.sidebar.image("https://cdn.pixabay.com/photo/2023/03/25/19/23/bicycle-7876692_1280.png", caption="Gambar dari URL")
 # st.sidebar.image("download.png", width=150)
 st.sidebar.subheader("🔍 Filter Data")
 
