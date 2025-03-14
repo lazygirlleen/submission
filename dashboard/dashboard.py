@@ -10,10 +10,10 @@ sns.set_style("whitegrid")
 st.title("📊 Analisis Peminjaman Sepeda")
 
 # Load dataset
-df_day = pd.read_csv("day.csv")
+df_day = pd.read_csv("submission/dashboard/day.csv")
 df_day["dteday"] = pd.to_datetime(df_day["dteday"])
 
-df_hour = pd.read_csv("hour.csv")
+df_hour = pd.read_csv("submission/dashboard/hour.csv")
 df_hour["dteday"] = pd.to_datetime(df_hour["dteday"])
 
 # Sidebar untuk filter data
