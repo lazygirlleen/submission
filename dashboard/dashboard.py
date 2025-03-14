@@ -7,12 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1Z73ftg-X8KxUoaezeI0hRfaLya0khjUV
 """
 
-!pip install streamlit
-
-!conda activate main-ds
-!pip install streamlit babel
-!pip install streamlit pandas matplotlib seaborn
-
 %%writefile app.py
 import streamlit as st
 import pandas as pd
