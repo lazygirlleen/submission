@@ -13,17 +13,6 @@ Original file is located at
 !pip install streamlit babel
 !pip install streamlit pandas matplotlib seaborn
 
-import importlib.metadata
-
-libraries = ['Babel', 'matplotlib', 'numpy', 'pandas', 'seaborn', 'streamlit']
-
-for lib in libraries:
-    try:
-        version = importlib.metadata.version(lib)
-        print(f"{lib}=={version}")
-    except importlib.metadata.PackageNotFoundError:
-        print(f"{lib} tidak ditemukan.")
-
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
 # import streamlit as st
