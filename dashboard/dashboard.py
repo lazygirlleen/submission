@@ -57,7 +57,7 @@ filtered_df_day = df_day[
 filtered_df_hour = df_hour[
     (df_hour["dteday"] >= pd.to_datetime(start_date)) &
     (df_hour["dteday"] <= pd.to_datetime(end_date)) &
-    (df_hour["season"] == selected_season_key) &
+    (df_hour["season"] == selected_season) &
     (df_day["weathersit"] == selected_weather)   
 ]
 
