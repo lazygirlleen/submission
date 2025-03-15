@@ -73,14 +73,23 @@ with col2:
     total_orders_hourly = filtered_df_hour["cnt"].sum()
     st.metric("Total Peminjaman (Jam)", value=total_orders_hourly)
 
-# Grafik Tren Peminjaman Sepeda Harian
-st.subheader("📅 Tren Peminjaman Sepeda Harian")
+# Grafik Tren Peminjaman Sepeda Bulanan
+st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(filtered_df_day["dteday"], filtered_df_day["cnt"], linewidth=2, marker="o", color="b", label="Harian")
-ax.set_title("Tren Peminjaman Sepeda Harian")
+ax.set_title("Tren Peminjaman Sepeda Bulanan")
 ax.set_xlabel("Tanggal")
 ax.set_ylabel("Jumlah Peminjaman")
 ax.legend()
+st.pyplot(fig)
+
+# Grafik Tren Peminjaman Sepeda Tiap Bulan
+st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.lineplot(data=filtered_df_hour, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
+ax.set_title("Tren Peminjaman Sepeda Bulanan")
+ax.set_xlabel("Bulan")
+ax.set_ylabel("Jumlah Peminjaman")
 st.pyplot(fig)
 
 # Grafik Tren Peminjaman Sepeda Tiap Jam
