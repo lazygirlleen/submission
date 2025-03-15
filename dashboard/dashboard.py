@@ -67,7 +67,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     total_orders = filtered_df_day["cnt"].sum()
-    st.metric("Total Peminjaman (Harian)", value=total_orders)
+    st.metric("Total Peminjaman (Bulanan)", value=total_orders)
 
 with col2:
     total_orders_hourly = filtered_df_hour["cnt"].sum()
@@ -78,18 +78,23 @@ st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
 all_months = pd.DataFrame({'mnth': range(1, 13)})
 monthly_trend = pd.merge(all_months, monthly_trend, on='mnth', how='left').fillna(0)
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.lineplot(x='mnth', y='cnt', data=monthly_trend, linewidth=2.5, ax=ax, color="g")
-sns.scatterplot(x='mnth', y='cnt', data=monthly_trend, s=80, color='black', ax=ax)
-ax.set_title('Tren Penggunaan Sepeda Per Bulan', fontsize=16)
-ax.set_xlabel('Bulan', fontsize=12)
-ax.set_ylabel('Jumlah Penggunaan Sepeda', fontsize=12)
-ax.set_xticks(monthly_trend['mnth'])
-ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-max_month = monthly_trend.loc[monthly_trend['cnt'].idxmax(), 'mnth']
-max_cnt = monthly_trend['cnt'].max()
-sns.despine()
-st.pyplot(fig)
+
+if monthly_trend.empty:
+    st.warning("Tidak ada data untuk filter yang dipilih. Silakan ubah filter.")
+else:
+    # --- Perbaikan ---
+    # Pastikan max_cnt > 0 untuk menghindari error saat anotasi
+    if max_cnt > 0:
+        ax.annotate('Puncak Peminjaman', xy=(max_month, max_cnt),
+                    xytext=(max_month, max_cnt + 500),
+                    arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=.2'))
+
+    # --- Perbaikan ---
+    # Tambahkan grid dan despine
+    ax.grid(axis='y', linestyle='--', alpha=0.7)  
+    sns.despine()
+
+    st.pyplot(fig)
 
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
