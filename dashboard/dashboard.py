@@ -76,6 +76,8 @@ with col2:
 # Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
+all_months = pd.DataFrame({'mnth': range(1, 13)})
+monthly_trend = pd.merge(all_months, monthly_trend, on='mnth', how='left').fillna(0)
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.lineplot(x='mnth', y='cnt', data=monthly_trend, linewidth=2.5, ax=ax, color="g")
 sns.scatterplot(x='mnth', y='cnt', data=monthly_trend, s=80, color='black', ax=ax)
