@@ -76,7 +76,7 @@ with col2:
 # Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 fig, ax = plt.subplots(figsize=(10, 5))
-# Mengelompokkan data dan menghitung total peminjaman per bulan
+# Mengelompokkan data dan menghitung total peminjaman per bulan dari data yang difilter
 monthly_data = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
 # Membuat grafik dengan penyesuaian
 sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
@@ -92,12 +92,16 @@ st.pyplot(fig)
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
+# Mengelompokkan data dan menghitung total peminjaman per jam dari data yang difilter
+hourly_data = filtered_df_hour.groupby('hr')['cnt'].sum().reset_index()  # Perubahan di sini
 # Membuat grafik dengan penyesuaian
-sns.lineplot(data=filtered_df_hour, x="hr", y="cnt", ci=None, marker="o", ax=ax, color="g")
-ax.set_title("Tren Peminjaman Sepeda Tiap Jam")
-ax.set_xlabel("Jam")
-ax.set_ylabel("Jumlah Peminjaman")
+sns.lineplot(data=hourly_data, x="hr", y="cnt", ci=None, marker="o", ax=ax, color="g")  # Perubahan di sini
+ax.set_title("Tren Peminjaman Sepeda Tiap Jam", fontsize=16)
+ax.set_xlabel("Jam", fontsize=12)
+ax.set_ylabel("Jumlah Peminjaman", fontsize=12)
 # Menambahkan grid
+ax.grid(True)
+# Menampilkan grafik
 st.pyplot(fig)
 
 # Menghitung pengaruh musim terhadap penggunaan sepeda
