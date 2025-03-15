@@ -32,13 +32,19 @@ end_date = st.sidebar.date_input("Tanggal Akhir", df_day["dteday"].max())
 
 # Pilih musim
 season_options = {1: "Semi", 2: "Panas", 3: "Gugur", 4: "Dingin"}
-selected_season = st.sidebar.selectbox("Pilih Musim", season_options.values())
-selected_season_key = list(season_options.keys())[list(season_options.values()).index(selected_season)]
+selected_season = st.sidebar.selectbox(
+    "Pilih Musim", 
+    options=list(season_options.keys()), 
+    format_func=lambda x: season_options.get(x)
+)
 
 # Pilih cuaca
 weather_options = {1: "Cerah", 2: "Berawan", 3: "Gerimis", 4: "Hujan"}
-selected_weather = st.sidebar.selectbox("Pilih Cuaca", weather_options.values())
-selected_weather_key = list(weather_options.keys())[list(weather_options.values()).index(selected_weather)]
+selected_weather = st.sidebar.selectbox(
+    "Pilih Cuaca", 
+    options=list(weather_options.keys()), 
+    format_func=lambda x: weather_options.get(x)
+)
 
 # Filter data berdasarkan pilihan
 filtered_df_day = df_day[
