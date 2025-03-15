@@ -118,6 +118,24 @@ sns.despine()
 # Menampilkan grafik
 st.pyplot(fig)
 
+# Menghitung pengaruh musim terhadap penggunaan sepeda
+season_effect = df_hour.groupby('weathersit')['cnt'].sum().reset_index()
+# Menampilkan grafik pengaruh musim
+st.subheader("🌦️ Pengaruh Cuaca terhadap Penggunaan Sepeda")
+fig, ax = plt.subplots(figsize=(8, 6))
+# Membuat grafik batang
+sns.barplot(x='weathersit', y='cnt', data=season_effect, ax=ax)
+# Menambahkan judul dan label sumbu
+ax.set_title('Pengaruh Cuaca terhadap Penggunaan Sepeda', fontsize=16)
+ax.set_xlabel('Kondisi Cuaca', fontsize=12)
+ax.set_ylabel('Jumlah Penggunaan Sepeda', fontsize=12)
+ax.set_xticklabels(['Cerah', 'Berawan', 'Gerimis', 'Hujan'], rotation=45, ha='right')
+# Menambahkan grid
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+sns.despine()
+# Menampilkan grafik
+st.pyplot(fig)
+
 # Checkbox untuk menampilkan data mentah
 if st.checkbox("📜 Tampilkan Data Mentah"):
     st.write("### Data Harian")
