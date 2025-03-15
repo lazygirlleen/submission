@@ -87,10 +87,8 @@ monthly_trend.plot(kind='line', ax=ax, color="g", marker='o')  # Menggunakan ax 
 ax.set_title('Tren Peminjaman Sepeda Bulanan')
 ax.set_xlabel('Bulan')
 ax.set_ylabel('Jumlah Peminjaman')
-ax.set_xticks(monthly_trend.index)  # Menggunakan index dari monthly_trend
-ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+ax.set_xticks(monthly_trend.index)  
 
-# Menambahkan label nilai pada setiap titik data
 for x, y in zip(monthly_trend.index, monthly_trend.values):
     ax.text(x, y + 50, f'{y:.0f}', ha='center', va='bottom', fontsize=10)
 
