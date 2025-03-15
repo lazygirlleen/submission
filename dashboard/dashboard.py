@@ -73,20 +73,24 @@ with col2:
     total_orders_hourly = filtered_df_hour["cnt"].sum()
     st.metric("Total Peminjaman (Jam)", value=total_orders_hourly)
 
-# Grafik Tren Peminjaman Sepeda Tiap Bulan
+# Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.lineplot(data=filtered_df_day, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")  # Ganti filtered_df_hour dengan filtered_df_day
-ax.set_title("Tren Peminjaman Sepeda Bulanan")
-ax.set_xlabel("Bulan")
-ax.set_ylabel("Jumlah Peminjaman")
-unique_months = sorted(filtered_df_day["mnth"].unique())  # Mengurutkan bulan unik
-month_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-xticklabels = [month_labels[month - 1] for month in unique_months]  # Mengambil label bulan yang ada datanya
-
-ax.set_xticks(unique_months)
-ax.set_xticklabels(xticklabels)
-
+monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.lineplot(x='mnth', y='cnt', data=monthly_trend, linewidth=2.5, ax=ax, color="g")
+sns.scatterplot(x='mnth', y='cnt', data=monthly_trend, s=80, color='black', ax=ax)
+ax.set_title('Tren Penggunaan Sepeda Per Bulan', fontsize=16)
+ax.set_xlabel('Bulan', fontsize=12)
+ax.set_ylabel('Jumlah Penggunaan Sepeda', fontsize=12)
+ax.set_xticks(monthly_trend['mnth'])
+ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+max_month = monthly_trend.loc[monthly_trend['cnt'].idxmax(), 'mnth']
+max_cnt = monthly_trend['cnt'].max()
+ax.annotate('Puncak Peminjaman', xy=(max_month, max_cnt), 
+            xytext=(max_month, max_cnt + 500),
+            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=.2'))
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+sns.despine()
 st.pyplot(fig)
 
 # Grafik Tren Peminjaman Sepeda Tiap Jam
