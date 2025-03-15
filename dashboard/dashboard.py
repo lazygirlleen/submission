@@ -75,27 +75,31 @@ with col2:
 
 # Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
-monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
-all_months = pd.DataFrame({'mnth': range(1, 13)})
-monthly_trend = pd.merge(all_months, monthly_trend, on='mnth', how='left').fillna(0)
 
-if monthly_trend.empty:
-    st.warning("Tidak ada data untuk filter yang dipilih. Silakan ubah filter.")
-else:
-    # --- Perbaikan ---
-    # Pastikan max_cnt > 0 untuk menghindari error saat anotasi
-    if max_cnt > 0:
-        ax.annotate('Puncak Peminjaman', xy=(max_month, max_cnt),
-                    xytext=(max_month, max_cnt + 500),
-                    arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=.2'))
+# Menghitung total peminjaman per bulan
+monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum()  # Tanpa reset_index
 
-    # --- Perbaikan ---
-    # Tambahkan grid dan despine
-    ax.grid(axis='y', linestyle='--', alpha=0.7)  
-    sns.despine()
+# --- Perbaikan ---
+# Membuat figure dan axes menggunakan plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 5))  
+monthly_trend.plot(kind='line', ax=ax, color="g", marker='o')  # Menggunakan ax dari plt.subplots()
 
-    st.pyplot(fig)
+ax.set_title('Tren Peminjaman Sepeda Bulanan')
+ax.set_xlabel('Bulan')
+ax.set_ylabel('Jumlah Peminjaman')
+ax.set_xticks(monthly_trend.index)  # Menggunakan index dari monthly_trend
+ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
 
+# Menambahkan label nilai pada setiap titik data
+for x, y in zip(monthly_trend.index, monthly_trend.values):
+    ax.text(x, y + 50, f'{y:.0f}', ha='center', va='bottom', fontsize=10)
+
+# --- Perbaikan ---
+# Menambahkan grid dan despine
+ax.grid(axis='y', linestyle='--', alpha=0.7)  
+sns.despine()
+
+st.pyplot(fig)  # Menampilkan grafik menggunakan st.pyplot()
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
