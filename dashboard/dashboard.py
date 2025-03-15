@@ -78,6 +78,19 @@ st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 fig, ax = plt.subplots(figsize=(10, 5))
 # Mengelompokkan data dan menghitung total peminjaman per bulan dari data yang difilter
 monthly_data = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
+# Definisikan setiap bulan agar sesuai dengan musim
+if selected_season == 1:  # Musim Semi
+    relevant_months = [3, 4, 5]
+    month_labels = ['Maret', 'April', 'Mei']
+elif selected_season == 2:  # Musim Panas
+    relevant_months = [6, 7, 8]
+    month_labels = ['Juni', 'Juli', 'Agustus']
+elif selected_season == 3:  # Musim Gugur
+    relevant_months = [9, 10, 11]
+    month_labels = ['September', 'Oktober', 'November']
+elif selected_season == 4:  # Musim Dingin
+    relevant_months = [12, 1, 2]
+    month_labels = ['Desember', 'Januari', 'Februari']
 # Membuat grafik dengan penyesuaian
 sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 # Menambahkan judul dan label sumbu
@@ -86,12 +99,6 @@ ax.set_xlabel("Bulan", fontsize=12)
 ax.set_ylabel("Jumlah Peminjaman", fontsize=12)
 # Menambahkan grid
 ax.grid(True)
-# Pengaturan sumbu x
-ax.set_xticks(relevant_months)
-ax.set_xticklabels(['Maret', 'April', 'Mei'] if selected_season == 1 else
-                   ['Juni', 'Juli', 'Agustus'] if selected_season == 2 else
-                   ['September', 'Oktober', 'November'] if selected_season == 3 else
-                   ['Desember', 'Januari', 'Februari'])
 # Menampilkan grafik
 st.pyplot(fig)
 
