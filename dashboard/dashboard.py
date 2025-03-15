@@ -79,7 +79,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 # Mengelompokkan data dan menghitung total peminjaman per bulan dari data yang difilter
 monthly_data = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
 # Membuat grafik dengan penyesuaian
-# sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
+sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 # Menambahkan judul dan label sumbu
 ax.set_title("Total Peminjaman Sepeda per Bulan", fontsize=16)
 ax.set_xlabel("Bulan", fontsize=12)
