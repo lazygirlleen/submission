@@ -86,9 +86,9 @@ ax.set_xlabel("Bulan", fontsize=12)
 ax.set_ylabel("Jumlah Peminjaman", fontsize=12)
 # Menambahkan grid
 ax.grid(True)
-
 # Menampilkan grafik
 st.pyplot(fig)
+
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
@@ -98,6 +98,24 @@ ax.set_title("Tren Peminjaman Sepeda Tiap Jam")
 ax.set_xlabel("Jam")
 ax.set_ylabel("Jumlah Peminjaman")
 # Menambahkan grid
+st.pyplot(fig)
+
+# Menghitung pengaruh musim terhadap penggunaan sepeda
+season_effect = df_hour.groupby('season')['cnt'].sum().reset_index()
+# Menampilkan grafik pengaruh musim
+st.subheader("🌦️ Pengaruh Musim terhadap Penggunaan Sepeda")
+fig, ax = plt.subplots(figsize=(8, 6))
+# Membuat grafik batang
+sns.barplot(x='season', y='cnt', data=season_effect, ax=ax)
+# Menambahkan judul dan label sumbu
+ax.set_title('Pengaruh Musim terhadap Penggunaan Sepeda', fontsize=16)
+ax.set_xlabel('Kondisi Musim', fontsize=12)
+ax.set_ylabel('Jumlah Penggunaan Sepeda', fontsize=12)
+ax.set_xticklabels(['Semi', 'Panas', 'Gugur', 'Dingin'], rotation=45, ha='right')
+# Menambahkan grid
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+sns.despine()
+# Menampilkan grafik
 st.pyplot(fig)
 
 # Checkbox untuk menampilkan data mentah
