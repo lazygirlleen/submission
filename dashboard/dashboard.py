@@ -74,10 +74,26 @@ with col2:
     st.metric("Total Peminjaman (Jam)", value=total_orders_hourly)
 
 # Grafik Tren Peminjaman Sepeda Bulanan
+# Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.lineplot(data=df_day.groupby('mnth')['cnt'].sum().reset_index(), x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 
+# Mengelompokkan data dan menghitung total peminjaman per bulan
+monthly_data = df_day.groupby('mnth')['cnt'].sum().reset_index()
+
+# Membuat grafik dengan penyesuaian
+sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
+
+# Menambahkan judul dan label sumbu
+ax.set_title("Total Peminjaman Sepeda per Bulan", fontsize=16)
+ax.set_xlabel("Bulan", fontsize=12)
+ax.set_ylabel("Jumlah Peminjaman", fontsize=12)
+
+# Menambahkan grid
+ax.grid(True)
+
+# Menampilkan grafik
+st.pyplot(fig)
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
