@@ -75,13 +75,8 @@ with col2:
 
 # Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
-st.write(f"Menampilkan data untuk bulan: {selected_month}") # Menampilkan judul dan bulan yang dipilih
-
-# Menampilkan data dalam bentuk tabel
-st.dataframe(filtered_data) 
-
-# Atau, menampilkan data dalam bentuk visualisasi (contoh: line chart)
-st.line_chart(filtered_data.groupby('dteday')['cnt'].sum()) # Menampilkan line chart jumlah peminjaman per hari dalam bulan yang dipilih
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.lineplot(data=df_day.groupby('mnth')['cnt'].sum().reset_index(), x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
