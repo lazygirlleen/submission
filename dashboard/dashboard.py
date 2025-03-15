@@ -75,29 +75,14 @@ with col2:
 
 # Grafik Tren Peminjaman Sepeda Bulanan
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
+st.write(f"Menampilkan data untuk bulan: {selected_month}") # Menampilkan judul dan bulan yang dipilih
 
-# Menghitung total peminjaman per bulan
-monthly_trend = filtered_df_day.groupby('mnth')['cnt'].sum()  # Tanpa reset_index
+# Menampilkan data dalam bentuk tabel
+st.dataframe(filtered_data) 
 
-# --- Perbaikan ---
-# Membuat figure dan axes menggunakan plt.subplots()
-fig, ax = plt.subplots(figsize=(10, 5))  
-monthly_trend.plot(kind='line', ax=ax, color="g", marker='o')  # Menggunakan ax dari plt.subplots()
+# Atau, menampilkan data dalam bentuk visualisasi (contoh: line chart)
+st.line_chart(filtered_data.groupby('dteday')['cnt'].sum()) # Menampilkan line chart jumlah peminjaman per hari dalam bulan yang dipilih
 
-ax.set_title('Tren Peminjaman Sepeda Bulanan')
-ax.set_xlabel('Bulan')
-ax.set_ylabel('Jumlah Peminjaman')
-ax.set_xticks(monthly_trend.index)  
-
-for x, y in zip(monthly_trend.index, monthly_trend.values):
-    ax.text(x, y + 50, f'{y:.0f}', ha='center', va='bottom', fontsize=10)
-
-# --- Perbaikan ---
-# Menambahkan grid dan despine
-ax.grid(axis='y', linestyle='--', alpha=0.7)  
-sns.despine()
-
-st.pyplot(fig)  # Menampilkan grafik menggunakan st.pyplot()
 # Grafik Tren Peminjaman Sepeda Tiap Jam
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
