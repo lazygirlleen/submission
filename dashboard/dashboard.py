@@ -88,10 +88,6 @@ ax.set_xticks(monthly_trend['mnth'])
 ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
 max_month = monthly_trend.loc[monthly_trend['cnt'].idxmax(), 'mnth']
 max_cnt = monthly_trend['cnt'].max()
-ax.annotate('Puncak Peminjaman', xy=(max_month, max_cnt), 
-            xytext=(max_month, max_cnt + 500),
-            arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=.2'))
-ax.grid(axis='y', linestyle='--', alpha=0.7)
 sns.despine()
 st.pyplot(fig)
 
