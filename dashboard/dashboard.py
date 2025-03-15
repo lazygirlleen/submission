@@ -80,8 +80,13 @@ sns.lineplot(data=filtered_df_day, x="mnth", y="cnt", ci=None, marker="o", ax=ax
 ax.set_title("Tren Peminjaman Sepeda Bulanan")
 ax.set_xlabel("Bulan")
 ax.set_ylabel("Jumlah Peminjaman")
-ax.set_xticks(filtered_df_day["mnth"].unique())  # Menambahkan label bulan
-ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+unique_months = sorted(filtered_df_day["mnth"].unique())  # Mengurutkan bulan unik
+month_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+xticklabels = [month_labels[month - 1] for month in unique_months]  # Mengambil label bulan yang ada datanya
+
+ax.set_xticks(unique_months)
+ax.set_xticklabels(xticklabels)
+
 st.pyplot(fig)
 
 # Grafik Tren Peminjaman Sepeda Tiap Jam
