@@ -36,7 +36,7 @@ selected_season = st.sidebar.selectbox("Pilih Musim", season_options.values())
 selected_season_key = list(season_options.keys())[list(season_options.values()).index(selected_season)]
 
 # Pilih cuaca
-season_options = {1: "Cerah", 2: "Berawan", 3: "Gerimis", 4: "Hujan"}
+weather_options = {1: "Cerah", 2: "Berawan", 3: "Gerimis", 4: "Hujan"}
 selected_weather = st.sidebar.selectbox("Pilih Cuaca", weather_options.values())
 selected_weather_key = list(weather_options.keys())[list(weather_options.values()).index(selected_weather)]
 
