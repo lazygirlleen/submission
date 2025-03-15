@@ -91,6 +91,9 @@ elif selected_season == 3:  # Musim Gugur
 elif selected_season == 4:  # Musim Dingin
     relevant_months = [12, 1, 2]
     month_labels = ['Desember', 'Januari', 'Februari']
+
+# Hanya ambil bulan yang relevan
+monthly_data = monthly_data[monthly_data['mnth'].isin(relevant_months)]
 # Membuat grafik dengan penyesuaian
 sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 # Menambahkan judul dan label sumbu
