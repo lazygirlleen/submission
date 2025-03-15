@@ -95,7 +95,7 @@ elif selected_season == 4:  # Musim Dingin
 # Hanya ambil bulan yang relevan
 monthly_data = monthly_data[monthly_data['mnth'].isin(relevant_months)]
 # Membuat grafik dengan penyesuaian
-sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
+# sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 # Menambahkan judul dan label sumbu
 ax.set_title("Total Peminjaman Sepeda per Bulan", fontsize=16)
 ax.set_xlabel("Bulan", fontsize=12)
