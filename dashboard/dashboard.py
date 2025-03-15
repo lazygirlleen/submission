@@ -77,7 +77,7 @@ with col2:
 st.subheader("📅 Tren Peminjaman Sepeda Bulanan")
 fig, ax = plt.subplots(figsize=(10, 5))
 # Mengelompokkan data dan menghitung total peminjaman per bulan
-monthly_data = df_day.groupby('mnth')['cnt'].sum().reset_index()
+monthly_data = filtered_df_day.groupby('mnth')['cnt'].sum().reset_index()
 # Membuat grafik dengan penyesuaian
 sns.lineplot(data=monthly_data, x="mnth", y="cnt", ci=None, marker="o", ax=ax, color="g")
 # Menambahkan judul dan label sumbu
