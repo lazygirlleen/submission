@@ -86,6 +86,12 @@ ax.set_xlabel("Bulan", fontsize=12)
 ax.set_ylabel("Jumlah Peminjaman", fontsize=12)
 # Menambahkan grid
 ax.grid(True)
+# Pengaturan sumbu x
+ax.set_xticks(relevant_months)
+ax.set_xticklabels(['Maret', 'April', 'Mei'] if selected_season == 1 else
+                   ['Juni', 'Juli', 'Agustus'] if selected_season == 2 else
+                   ['September', 'Oktober', 'November'] if selected_season == 3 else
+                   ['Desember', 'Januari', 'Februari'])
 # Menampilkan grafik
 st.pyplot(fig)
 
