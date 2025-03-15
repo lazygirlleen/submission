@@ -93,7 +93,7 @@ st.pyplot(fig)
 st.subheader("⏳ Tren Peminjaman Sepeda Tiap Jam")
 fig, ax = plt.subplots(figsize=(10, 5))
 # Mengelompokkan data dan menghitung total peminjaman per jam dari data yang difilter
-hourly_data = filtered_df_hour.groupby('hr')['cnt'].sum().reset_index()  # Perubahan di sini
+hourly_data = filtered_df_hour.groupby('hr')['cnt'].sum().reset_index()
 # Membuat grafik dengan penyesuaian
 sns.lineplot(data=hourly_data, x="hr", y="cnt", ci=None, marker="o", ax=ax, color="g")  # Perubahan di sini
 ax.set_title("Tren Peminjaman Sepeda Tiap Jam", fontsize=16)
